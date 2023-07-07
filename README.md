@@ -83,3 +83,14 @@ Agregamos al Data Flow un Box de Derived Column para agregar los datos de la var
 <p align="center">
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen12.png"  height=450>
 </p>
+Agregamos el destino que sería la tabla Accidentes dentro de la DB MONROE:
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen13.png"  height=450>
+</p>
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen14.png"  height=450>
+</p>
+
+Hasta este punto podríamos ejecutar el proyecto y cargaria el archivo de Excel para el mes 07. Nos falta crear una variable para que el nombre del archivo sea dinámico y pueda leer el nombre del archivo a medida que van cambiando los meses.
+
