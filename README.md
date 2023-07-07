@@ -120,5 +120,5 @@ Fecha: AAAAMMDD ```(DT_WSTR, 4)YEAR( GETDATE()  ) + RIGHT( "0" + (DT_WSTR, 2)  M
 Ruta: Ruta donde se almacenarán los archivos
 
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen18.png"  height=300>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen19.png"  height=300>
 </p>
