@@ -29,5 +29,8 @@ Longitud VARCHAR(MAX)
 Creamos la variable mencionada anteriormente:
 
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen2.png"  height=150>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen2.png"  height=450>
 </p>
+
+Al hacer click en el punto 4(de la imágen anterior) **`...`** se definirá una expresión para obtener el año y el mes. 
+En este caso emplearemos la siguiente expresión para obtener el año actual: ```YEAR(GETDATE()) ```
