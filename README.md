@@ -92,5 +92,21 @@ Agregamos el destino que sería la tabla Accidentes dentro de la DB MONROE:
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen14.png"  height=450>
 </p>
 
-Hasta este punto podríamos ejecutar el proyecto y cargaria el archivo de Excel para el mes 07. Nos falta crear una variable para que el nombre del archivo sea dinámico y pueda leer el nombre del archivo a medida que van cambiando los meses.
+Hasta este punto podríamos ejecutar el proyecto y cargaria el archivo de Excel para el mes 07. Nos falta crear una variable para que el nombre del archivo sea dinámico y pueda leer el nombre del archivo a medida que van cambiando los meses. En esta variable se especifica la ruta donde se almacenarán los archivos:
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen15.png"  height=200>
+</p>
+
+En las propiedades del Excel vamos a definir la expresión para hacer dinámico el nombre del archivo.
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen16.png"  height=200>
+</p>
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen17.png"  height=200>
+</p>
+
+
 
