@@ -20,8 +20,14 @@ Longitud VARCHAR(MAX)
 ```
 * Creamos el proyecto de Integration Services en Visual Studio.
 
-1. A continuación crearemos una variable denominada **`Periodo`** la cual definiará la estructura del nombre de los archivos de excel. La idea es que esta variable pueda identificar el patron de año y mes como se ilustra en la siguiente imágen:
+<b>1.</b> A continuación crearemos una variable denominada **`Periodo`** la cual definiará la estructura del nombre de los archivos de excel. La idea es que esta variable pueda identificar el patron de año y mes como se ilustra en la siguiente imágen:
 
 <p align="center">
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen1.png"  height=150>
+</p>
+
+Creamos la variable mencionada anteriormente:
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen2.png"  height=150>
 </p>
