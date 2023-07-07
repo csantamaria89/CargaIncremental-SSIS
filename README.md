@@ -3,5 +3,5 @@ Documentación para hacer una carga incremental en una BD de SQL Server mensual 
 
 
 <p align="center">
-<img src="https://github.com/csantamaria89/Proyecto-Individual-I/blob/main/assets/streaming.jpg"  height=300>
+<img src=""  height=300>
 </p>
