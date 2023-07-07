@@ -59,4 +59,10 @@ En este punto, seleccionamos del Tool Box "Excute SQL task" el cual denominamos 
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen6.png"  height=500>
 </p>
 
+Ahora
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen7.png"  height=500>
+</p>
+
+
 
