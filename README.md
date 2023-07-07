@@ -101,11 +101,11 @@ Hasta este punto podríamos ejecutar el proyecto y cargaria el archivo de Excel 
 En las propiedades del Excel vamos a definir la expresión para hacer dinámico el nombre del archivo.
 
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen16.png"  height=200>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen16.png"  height=50>
 </p>
 
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen17.png"  height=200>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen17.png"  height=450>
 </p>
 
 
