@@ -59,10 +59,24 @@ En este punto, seleccionamos del Tool Box "Excute SQL task" el cual denominamos 
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen6.png"  height=500>
 </p>
 
-Ahora
+Ahora agregaremos un Box de Data Flow Task, el cual llamaremos Carga Data Accidente y configuraremos el origen en este caso un archivo de Excel en el Data Flow:
+
 <p align="center">
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen7.png"  height=500>
 </p>
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen8.png"  height=500>
+</p>
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen9.png"  height=500>
+</p>
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen10.png"  height=500>
+</p>
 
+Agregamos al Data Flow un Box de Data Convertion, podemos compararlo con la DB que creamos al inicio para dejar los mismos tipos de variables:
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen11.png"  height=500>
+</p>
 
 
