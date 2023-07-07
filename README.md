@@ -50,8 +50,13 @@ Para lo cual es necesrio conocer las variables en SSIS:
 Procedemos a probar la expresión:
 
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen5.png"  height=450>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen5.png"  height=150>
 </p>
 
+En este punto, seleccionamos del Tool Box "Excute SQL task" el cual denominamos -> Limpiar mes en curso. Se configura con la conexión al servidor y DB en este caso MASTER. También el SQL Statement, el cual tiene la siguiente consulta: ```DELETE FROM ACCIDENTES WHERE PERIODO = ?```. finalmente en la parte de Parameter Maping agregamos la variable que creamos "Periodo" y en Paarameter Name colocamos 0. Puedes guiarte de la siguiente imagen:
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen6.png"  height=500>
+</p>
 
 
