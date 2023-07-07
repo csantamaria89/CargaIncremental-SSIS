@@ -108,5 +108,5 @@ En las propiedades del Excel vamos a definir la expresión para hacer dinámico 
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen17.png"  height=450>
 </p>
 
-
+Finalmente podemos configurar un Breakpoint de tipo Post Execute para limpiar la tabla de Accidentes y poder validar que efectivamente la ejecución del proyecto funciona.
 
