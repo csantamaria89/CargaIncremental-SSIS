@@ -112,13 +112,37 @@ En las propiedades del Excel vamos a definir la expresión para hacer dinámico 
 
 Finalmente podemos configurar un Breakpoint de tipo Post Execute para limpiar la tabla de Accidentes y poder validar que efectivamente la ejecución del proyecto funciona.
 
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen18.png"  height=300>
+</p>
+
 # Carga Incremental diaria SSIS
 
 Creación de variables:
-Periodo: AAAAMM ```(DT_I4) LEFT( (DT_WSTR, 8) @[User::Fecha], 6 )```
-Fecha: AAAAMMDD ```(DT_WSTR, 4)YEAR( GETDATE()  ) + RIGHT( "0" + (DT_WSTR, 2)  MONTH( GETDATE() ) , 2 ) + RIGHT( "0" + (DT_WSTR, 2)  DAY( GETDATE() ) , 2 ))```
-Ruta: Ruta donde se almacenarán los archivos
+
+<b>Periodo:</b> AAAAMM ```(DT_I4) LEFT( (DT_WSTR, 8) @[User::Fecha], 6 )```
+
+<b>Fecha:</b> AAAAMMDD ```(DT_WSTR, 4)YEAR( GETDATE()  ) + RIGHT( "0" + (DT_WSTR, 2)  MONTH( GETDATE() ) , 2 ) + RIGHT( "0" + (DT_WSTR, 2)  DAY( GETDATE() ) , 2 ))```
+
+<b>Ruta:</b> Ruta donde se almacenarán los archivos
 
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen19.png"  height=300>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen19.png"  height=100>
 </p>
+
+Cargamos la siguiente DB: Ver Script ```Script+-+Carga+incremental+Diaria.sql```
+
+```Ruby
+CREATE TABLE ACCIDENTES2(
+Fecha INT,
+Periodo INT,
+NumeroRegistro INT,
+Semana VARCHAR(MAX),
+Colision VARCHAR(MAX),
+TipoLesion VARCHAR(MAX),
+FactorPrimario VARCHAR(MAX),
+ReporteLocasion VARCHAR(MAX),
+Latitud VARCHAR(MAX),
+Longitud VARCHAR(MAX)
+)
+```
