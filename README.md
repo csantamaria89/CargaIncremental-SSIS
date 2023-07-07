@@ -165,3 +165,19 @@ Longitud VARCHAR(MAX)
 <p align="center">
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen22.png"  height=450>
 </p>
+
+<b> OLE DB Destination </b>  Se configura la DB destino
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen23.png"  height=450>
+</p>
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen24.png"  height=350>
+</p>
+
+<b> Propiedades Excel </b>  Se configura las propiedades del Excel, FilePath agregando la expresión que trae el nombre del archivo de manera dinámica 
+```@[User::Ruta]+"DataAccidente_"+ (DT_WSTR, 8) @[User::Fecha]+".xlsx"```
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen25.png"  height=350>
+</p>
