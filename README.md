@@ -159,3 +159,9 @@ Longitud VARCHAR(MAX)
 <p align="center">
 <img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen21.png"  height=450>
 </p>
+
+<b> Derived Column  </b>  Se agregan las variables de fecha y periodo
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen22.png"  height=450>
+</p>
