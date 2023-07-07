@@ -146,3 +146,8 @@ Latitud VARCHAR(MAX),
 Longitud VARCHAR(MAX)
 )
 ```
+<b>Execute SQLTask </b>
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen20.png"  height=100>
+</p>
