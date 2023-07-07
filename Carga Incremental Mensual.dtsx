@@ -1,0 +1,1096 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/6/2023 7:54:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-4UU91N5N"
+  DTS:CreatorName="LAPTOP-4UU91N5N\kmilo"
+  DTS:DTSID="{07A924D9-BB9A-4EE4-9B79-05631309CB8E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5223.0"
+  DTS:LocaleID="9226"
+  DTS:ObjectName="Carga Incremental Mensual"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{F7E0E665-DED9-496C-AF31-FD236579554D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{9155A44A-CD47-4ED6-BFE3-676BB2D15EBF}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[User::Ruta]+"DataAccidente_"+ (DT_WSTR, 6) @[User::Periodo]+".xlsx"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\SSIS Integration Services\Carga Incremental Mensual\DataAccidente_202307.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-4UU91N5N\SQLEXPRESS.MONROE]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{33212954-4747-45DE-A2CF-9D34343E4A44}"
+      DTS:ObjectName="LAPTOP-4UU91N5N\SQLEXPRESS.MONROE">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-4UU91N5N\SQLEXPRESS;Initial Catalog=MONROE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Carga Incremental Mensual-{33212954-4747-45DE-A2CF-9D34343E4A44}LAPTOP-4UU91N5N\SQLEXPRESS.MONROE;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{21EA8A5A-55FF-4BA9-8582-56DD10523AE8}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_I4) ( (DT_WSTR, 4)YEAR( GETDATE() ) + RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH( GETDATE() ), 2))"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Periodo">
+      <DTS:VariableValue
+        DTS:DataType="3">202307</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B276BE49-0E2B-4E3F-9DA8-ABCD0E3E9A80}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Ruta">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\SSIS Integration Services\Carga Incremental Mensual\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Carga Data Accidente"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E0E6B33F-A7A6-4489-A9C9-D309E37FCE85}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Carga Data Accidente"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Carga Data Accidente\Carga Tabla Accidentes"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Carga Tabla Accidentes"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ACCIDENTES]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-4UU91N5N\SQLEXPRESS.MONROE]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-4UU91N5N\SQLEXPRESS.MONROE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[PERIODO]"
+                      cachedDataType="i4"
+                      cachedName="PERIODO"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Periodo]"
+                      lineageId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Output].Columns[PERIODO]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of NumeroRegistro]"
+                      cachedDataType="i4"
+                      cachedName="Copy of NumeroRegistro"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[NumeroRegistro]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NumeroRegistro]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of Semana]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of Semana"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Semana]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Semana]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of Colision]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of Colision"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Colision]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Colision]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of TipoLesion]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of TipoLesion"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[TipoLesion]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TipoLesion]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of FactorPrimario]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of FactorPrimario"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[FactorPrimario]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FactorPrimario]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of ReporteLocasion]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of ReporteLocasion"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[ReporteLocasion]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ReporteLocasion]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of Latitud]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of Latitud"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Latitud]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Latitud]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].Columns[Copy of Longitud]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of Longitud"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Longitud]"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Longitud]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Periodo]"
+                      dataType="i4"
+                      name="Periodo" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[NumeroRegistro]"
+                      dataType="i4"
+                      name="NumeroRegistro" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Semana]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Semana" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Colision]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Colision" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[TipoLesion]"
+                      codePage="1252"
+                      dataType="text"
+                      name="TipoLesion" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[FactorPrimario]"
+                      codePage="1252"
+                      dataType="text"
+                      name="FactorPrimario" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[ReporteLocasion]"
+                      codePage="1252"
+                      dataType="text"
+                      name="ReporteLocasion" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Latitud]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Latitud" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input].ExternalColumns[Longitud]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Longitud" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Carga Tabla Accidentes.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Carga Tabla Accidentes.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Carga Tabla Accidentes.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Data Accidente\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[NumeroRegistro]"
+                      cachedDataType="r8"
+                      cachedName="NumeroRegistro"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[NumeroRegistro]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[Semana]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Semana"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Semana]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[Colision]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Colision"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Colision]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[TipoLesion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TipoLesion"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[TipoLesion]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[FactorPrimario]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FactorPrimario"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[FactorPrimario]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[ReporteLocasion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ReporteLocasion"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[ReporteLocasion]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[Latitud]"
+                      cachedDataType="r8"
+                      cachedName="Latitud"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Latitud]" />
+                    <inputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input].Columns[Longitud]"
+                      cachedDataType="r8"
+                      cachedName="Longitud"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Longitud]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NumeroRegistro]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NumeroRegistro]"
+                      name="Copy of NumeroRegistro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[NumeroRegistro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Semana]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Semana]"
+                      name="Copy of Semana"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Semana]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Colision]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Colision]"
+                      name="Copy of Colision"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Colision]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TipoLesion]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TipoLesion]"
+                      name="Copy of TipoLesion"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[TipoLesion]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FactorPrimario]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FactorPrimario]"
+                      name="Copy of FactorPrimario"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[FactorPrimario]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ReporteLocasion]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ReporteLocasion]"
+                      name="Copy of ReporteLocasion"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[ReporteLocasion]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Latitud]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Latitud]"
+                      name="Copy of Latitud"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Latitud]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Longitud]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Longitud]"
+                      name="Copy of Longitud"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Longitud]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Data Accidente\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Carga Data Accidente\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Carga Data Accidente\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Output].Columns[PERIODO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Output].Columns[PERIODO]"
+                      name="PERIODO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::Periodo]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::Periodo]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Carga Data Accidente\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Data Accidente\Origen Accidentes"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Origen Accidentes"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Reporte$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga Data Accidente\Origen Accidentes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[NumeroRegistro]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[NumeroRegistro]"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[NumeroRegistro]"
+                      name="NumeroRegistro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Semana]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Semana]"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Semana]"
+                      name="Semana"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Colision]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Colision]"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Colision]"
+                      name="Colision"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[TipoLesion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[TipoLesion]"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[TipoLesion]"
+                      name="TipoLesion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[FactorPrimario]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[FactorPrimario]"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[FactorPrimario]"
+                      name="FactorPrimario"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[ReporteLocasion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[ReporteLocasion]"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[ReporteLocasion]"
+                      name="ReporteLocasion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Latitud]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Latitud]"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Latitud]"
+                      name="Latitud"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Longitud]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Longitud]"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].Columns[Longitud]"
+                      name="Longitud"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[NumeroRegistro]"
+                      dataType="r8"
+                      name="NumeroRegistro" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Semana]"
+                      dataType="wstr"
+                      length="255"
+                      name="Semana" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Colision]"
+                      dataType="wstr"
+                      length="255"
+                      name="Colision" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[TipoLesion]"
+                      dataType="wstr"
+                      length="255"
+                      name="TipoLesion" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[FactorPrimario]"
+                      dataType="wstr"
+                      length="255"
+                      name="FactorPrimario" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[ReporteLocasion]"
+                      dataType="wstr"
+                      length="255"
+                      name="ReporteLocasion" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Latitud]"
+                      dataType="r8"
+                      name="Latitud" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output].ExternalColumns[Longitud]"
+                      dataType="r8"
+                      name="Longitud" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[NumeroRegistro]"
+                      dataType="r8"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[NumeroRegistro]"
+                      name="NumeroRegistro" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Semana]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Semana]"
+                      name="Semana" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Colision]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Colision]"
+                      name="Colision" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[TipoLesion]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[TipoLesion]"
+                      name="TipoLesion" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[FactorPrimario]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[FactorPrimario]"
+                      name="FactorPrimario" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[ReporteLocasion]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[ReporteLocasion]"
+                      name="ReporteLocasion" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Latitud]"
+                      dataType="r8"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Latitud]"
+                      name="Latitud" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Longitud]"
+                      dataType="r8"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[Longitud]"
+                      name="Longitud" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Carga Data Accidente.Paths[Data Conversion Output]"
+              endId="Package\Carga Data Accidente\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Carga Data Accidente\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Carga Data Accidente.Paths[Derived Column Output]"
+              endId="Package\Carga Data Accidente\Carga Tabla Accidentes.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Carga Data Accidente\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Carga Data Accidente.Paths[Excel Source Output]"
+              endId="Package\Carga Data Accidente\Data Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Carga Data Accidente\Origen Accidentes.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar mes en curso"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{54451940-095A-4BA4-A217-FE51BB1C3A90}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar mes en curso"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{33212954-4747-45DE-A2CF-9D34343E4A44}"
+          SQLTask:SqlStatementSource="DELETE FROM ACCIDENTES WHERE PERIODO = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::Periodo"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{35F7930E-8DB3-443B-886D-3786B136C4DD}"
+      DTS:From="Package\Limpiar mes en curso"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Carga Data Accidente" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Limpiar mes en curso"
+          TopLeft="10.7142857370936,19.1176470420662" />
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Carga Data Accidente"
+          TopLeft="17.1428571793498,87.1764705118218" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="103.728571458222,60.7176470420662">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.4588234697556"
+              Start="0,0"
+              End="0,18.9588234697556">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.9588234697556" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Carga Data Accidente">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Carga Data Accidente\Origen Accidentes"
+          TopLeft="35.7142857903121,25.9999999772099" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Carga Data Accidente\Data Conversion"
+          TopLeft="40.0000000851494,90.9999999202349" />
+        <EdgeLayout
+          Id="Package\Carga Data Accidente.Paths[Excel Source Output]"
+          TopLeft="117.457142937731,67.5999999772099">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.399999943025"
+              Start="0,0"
+              End="0,15.899999943025">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.899999943025" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Carga Data Accidente\Derived Column"
+          TopLeft="40.7142858009558,159.823529271673" />
+        <EdgeLayout
+          Id="Package\Carga Data Accidente.Paths[Data Conversion Output]"
+          TopLeft="117.357142943053,132.599999920235">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.2235293514382"
+              Start="0,0"
+              End="0,19.7235293514382">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.7235293514382" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\Carga Data Accidente\Carga Tabla Accidentes"
+          TopLeft="27.8571429164434,233.99999979489" />
+        <EdgeLayout
+          Id="Package\Carga Data Accidente.Paths[Derived Column Output]"
+          TopLeft="119.4857143587,201.423529271673">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.5764705232167"
+              Start="0,0"
+              End="0,25.0764705232167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.0764705232167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Carga Data Accidente\Origen Accidentes">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Carga Data Accidente\Carga Tabla Accidentes">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
