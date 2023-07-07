@@ -1,4 +1,4 @@
-# Carga Incremental mensual SSIS
+![image](https://github.com/csantamaria89/CargaIncremental-SSIS/assets/108701000/03cb5323-c6c7-4d7c-8ad6-4780389baa11)# Carga Incremental mensual SSIS
 Documentación para hacer una carga incremental mensual en una BD de SQL Server mensual y diaria en SSIS SQL Server Integration Services
 
 * Relizaremos la creación de la DB que utilizaremos para el ejercicio. <b> (Ver archivo **`"Script Monroe.sql"`**) </b>
@@ -149,5 +149,13 @@ Longitud VARCHAR(MAX)
 <b>Execute SQLTask </b>
 
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen20.png"  height=100>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen20.png"  height=450>
+</p>
+
+<b> Data Flow </b>  Configurar el Source. Excel Source: Agregar la ruta del archivo
+
+<b> Data Convertion </b>  Configurar las variables
+
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen21.png"  height=450>
 </p>
