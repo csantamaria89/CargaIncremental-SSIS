@@ -76,7 +76,10 @@ Ahora agregaremos un Box de Data Flow Task, el cual llamaremos Carga Data Accide
 
 Agregamos al Data Flow un Box de Data Convertion, podemos compararlo con la DB que creamos al inicio para dejar los mismos tipos de variables:
 <p align="center">
-<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen11.png"  height=500>
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen11.png"  height=450>
 </p>
 
-
+Agregamos al Data Flow un Box de Derived Column para agregar los datos de la variable PERIODO en la DB:
+<p align="center">
+<img src="https://github.com/csantamaria89/CargaIncremental-SSIS/blob/main/assets/Imagen12.png"  height=450>
+</p>
