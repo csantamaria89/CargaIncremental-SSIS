@@ -1,4 +1,4 @@
-![image](https://github.com/csantamaria89/CargaIncremental-SSIS/assets/108701000/03cb5323-c6c7-4d7c-8ad6-4780389baa11)# Carga Incremental mensual SSIS
+# Carga Incremental mensual SSIS
 Documentación para hacer una carga incremental mensual en una BD de SQL Server mensual y diaria en SSIS SQL Server Integration Services
 
 * Relizaremos la creación de la DB que utilizaremos para el ejercicio. <b> (Ver archivo **`"Script Monroe.sql"`**) </b>
